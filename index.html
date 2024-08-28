@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS Companies by Country</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        #chart-container { width: 100%; height: 800px; }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center; color: #333;">Select countries by number of SaaS companies</h2>
+    <div id="chart-container">
+        <canvas id="saasChart"></canvas>
+    </div>
+
+    <script>
+        const data = [
+            { country: 'United States', companies: 9000 },
+            { country: 'United Kingdom', companies: 1500 },
+            { country: 'Canada', companies: 1000 },
+            { country: 'Germany', companies: 900 },
+            { country: 'India', companies: 800 },
+            { country: 'France', companies: 750 },
+            { country: 'China', companies: 500 },
+            { country: 'Australia', companies: 450 },
+            { country: 'Brazil', companies: 400 },
+            { country: 'Spain', companies: 350 },
+            { country: 'Netherlands', companies: 300 },
+            { country: 'Israel', companies: 275 },
+            { country: 'Singapore', companies: 250 },
+            { country: 'Sweden', companies: 225 },
+            { country: 'Italy', companies: 200 },
+            { country: 'Japan', companies: 175 },
+            { country: 'Ireland', companies: 150 },
+            { country: 'Poland', companies: 125 },
+            { country: 'Finland', companies: 100 },
+            { country: 'Switzerland', companies: 75 },
+        ];
+
+        const ctx = document.getElementById('saasChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: data.map(d => d.country),
+                datasets: [{
+                    label: 'Number of SaaS Companies',
+                    data: data.map(d => d.companies),
+                    backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: {
+                    duration: 1000,
+                    easing: 'easeOutQuart'
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Companies: ${context.parsed.x}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Companies'
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 10
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
